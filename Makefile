@@ -1,7 +1,7 @@
 
 
 .PHONY: all
-all: out/fig_census_idi.pdf
+all: nzacc2.pdf
 
 
 out/plot_theme.rds: src/plot_theme.R
@@ -21,13 +21,22 @@ out/idi.rds: src/idi.R \
 
 ## Graphs of data
 
-out/fig_census_idi.pdf: src/fig_census_idi.R \
-                        out/census.rds \
-                        out/idi.rds \
-                        out/plot_theme.rds
+out/fig_census.pdf: src/fig_census.R \
+                    out/census.rds \
+                    out/plot_theme.rds
 	Rscript $<
 
 
+
+## Report
+
+
+nzacc2.pdf: nzacc2.Rmd \
+            out/fig_census.pdf
+	Rscript -e "rmarkdown::render('$<')"
+	
+	
+	
 ## Clean up
 
 .PHONY: clean

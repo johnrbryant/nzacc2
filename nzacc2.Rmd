@@ -1,0 +1,21 @@
+---
+title: "Bayesian demographic account for New Zealand"
+author: "Bayesian Demography Ltd"
+date: '`r format(Sys.time(), "%d %B %Y")`'
+output:
+  bookdown::pdf_document2:
+    fig_caption: yes
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(echo = TRUE)
+```
+
+## Data
+
+```{r census, fig.cap = "Census data"}
+include_graphics("out/fig_census.pdf")
+```
+
+
