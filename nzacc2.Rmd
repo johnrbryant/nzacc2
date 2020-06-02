@@ -18,4 +18,12 @@ opts_chunk$set(echo = TRUE)
 include_graphics("out/fig_census.pdf")
 ```
 
+```{r reg-births, fig.cap = "Registered births"}
+include_graphics("out/fig_reg_births.pdf")
+```
+
+```{r reg-deaths, fig.cap = "Registered deaths"}
+include_graphics("out/fig_reg_deaths.pdf")
+```
+
 
