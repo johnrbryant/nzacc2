@@ -5,16 +5,15 @@ library(ggplot2)
 
 plot_theme <- readRDS("out/plot_theme.rds")
 
-time_keep <- seq(from = 2002, to = 2018, by = 2)
+palette <- readRDS("out/palette.rds")
 
 reg_births <- readRDS("out/reg_deaths.rds") %>%
-    as.data.frame(midpoints = "age") %>%
-    filter(time %in% time_keep)
+    as.data.frame(midpoints = "age")
     
 p <- ggplot(reg_births, aes(x = age, y = count, color = sex)) +
-    facet_wrap(vars(time)) +
+    facet_wrap(vars(time), nrow = 3) +
     geom_line() +
-    scale_color_manual(values = c("darkblue", "darkorange")) +
+    scale_color_manual(values = palette$sex) +
     xlab("Age") +
     ylab("") +
     ylim(0, NA) +
@@ -22,8 +21,8 @@ p <- ggplot(reg_births, aes(x = age, y = count, color = sex)) +
 
 graphics.off()
 pdf(file = "out/fig_reg_deaths.pdf",
-    width = 6,
-    height = 6)
+    width = 7,
+    height = 5)
 plot(p)
 dev.off()
     

@@ -5,11 +5,12 @@ date: '`r format(Sys.time(), "%d %B %Y")`'
 output:
   bookdown::pdf_document2:
     fig_caption: yes
+    toc: no
 ---
 
 ```{r setup, include=FALSE}
 library(knitr)
-opts_chunk$set(echo = TRUE)
+opts_chunk$set(echo = FALSE)
 ```
 
 ## Data
@@ -24,6 +25,14 @@ include_graphics("out/fig_reg_births.pdf")
 
 ```{r reg-deaths, fig.cap = "Registered deaths"}
 include_graphics("out/fig_reg_deaths.pdf")
+```
+
+```{r arrivals, fig.cap = "International arrivals"}
+include_graphics("out/fig_migration_arrivals.pdf")
+```
+
+```{r departures, fig.cap = "International departures"}
+include_graphics("out/fig_migration_departures.pdf")
 ```
 
 

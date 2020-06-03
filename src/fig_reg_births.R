@@ -5,14 +5,11 @@ library(ggplot2)
 
 plot_theme <- readRDS("out/plot_theme.rds")
 
-time_keep <- seq(from = 2002, to = 2018, by = 2)
-
 reg_births <- readRDS("out/reg_births.rds") %>%
-    as.data.frame(midpoints = "age") %>%
-    filter(time %in% time_keep)
+    as.data.frame(midpoints = "age")
     
 p <- ggplot(reg_births, aes(x = age, y = count)) +
-    facet_wrap(vars(time)) +
+    facet_wrap(vars(time), nrow = 3) +
     geom_line() +
     xlab("Age of mother") +
     ylab("") +
@@ -21,8 +18,8 @@ p <- ggplot(reg_births, aes(x = age, y = count)) +
 
 graphics.off()
 pdf(file = "out/fig_reg_births.pdf",
-    width = 5,
-    height = 5)
+    width = 7,
+    height = 4)
 plot(p)
 dev.off()
     

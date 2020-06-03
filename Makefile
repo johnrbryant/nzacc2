@@ -7,6 +7,9 @@ all: nzacc2.pdf
 out/plot_theme.rds: src/plot_theme.R
 	Rscript $<
 
+out/palette.rds: src/palette.R
+	Rscript $<
+
 
 ## Prepare data
 
@@ -24,6 +27,10 @@ out/reg_births.rds : src/reg_births.R \
 
 out/reg_deaths.rds : src/reg_deaths.R \
                      data/VSD349201_20181209_054420_13.csv
+	Rscript $<
+
+out/migration.rds : src/migration.R \
+                    data/ITM552105_20200603_110236_41.csv
 	Rscript $<
 
 
@@ -44,6 +51,19 @@ out/fig_reg_deaths.pdf: src/fig_reg_deaths.R \
                         out/plot_theme.rds
 	Rscript $<
 
+out/fig_migration_arrivals.pdf: src/fig_migration.R \
+                                out/migration.rds \
+                                out/plot_theme.rds \
+                                out/palette.rds
+	Rscript $< --direction=arrivals
+
+out/fig_migration_departures.pdf: src/fig_migration.R \
+                                  out/migration.rds \
+                                  out/plot_theme.rds \
+                                  out/palette.rds
+	Rscript $< --direction=departures
+
+
 
 
 ## Report
@@ -52,7 +72,9 @@ out/fig_reg_deaths.pdf: src/fig_reg_deaths.R \
 nzacc2.pdf: nzacc2.Rmd \
             out/fig_census.pdf \
             out/fig_reg_births.pdf \
-            out/fig_reg_deaths.pdf
+            out/fig_reg_deaths.pdf \
+            out/fig_migration_arrivals.pdf \
+            out/fig_migration_departures.pdf
 	Rscript -e "rmarkdown::render('$<')"
 
 
