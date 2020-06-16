@@ -7,22 +7,20 @@ plot_theme <- readRDS("out/plot_theme.rds")
 
 palette <- readRDS("out/palette.rds")
 
-census <- readRDS("out/census.rds") %>%
-    as.data.frame(midpoints = "age") %>%
-    mutate(count = 1e-3 * count)
+reg_births_sex <- readRDS("out/reg_births_sex.rds") %>%
+    as.data.frame()
     
-p <- ggplot(census, aes(x = age, y = count, color = sex)) +
-    facet_wrap(vars(time)) +
+p <- ggplot(reg_births_sex, aes(x = time, y = count, color = sex)) +
     geom_line() +
     scale_color_manual(values = palette$sex) +
-    xlab("Age") +
-    ylab("Thousands") +
+    xlab("Year") +
+    ylab("") +
     ylim(0, NA) +
     plot_theme
 
 graphics.off()
-pdf(file = "out/fig_census.pdf",
-    width = 7,
+pdf(file = "out/fig_reg_births_sex.pdf",
+    width = 5,
     height = 3)
 plot(p)
 dev.off()

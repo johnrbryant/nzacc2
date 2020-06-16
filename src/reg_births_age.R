@@ -4,7 +4,7 @@ library(dplyr)
 library(dembase)
 library(readr)
 
-reg_births <- read_csv(file = "data/VSB355801_20181209_055056_66.csv",
+reg_births_age <- read_csv(file = "data/VSB355801_20181209_055056_66.csv",
                        skip = 1,
                        n_max = 35) %>%
     rename(age = X1) %>%
@@ -12,7 +12,8 @@ reg_births <- read_csv(file = "data/VSB355801_20181209_055056_66.csv",
     mutate(age = recode(age, "Under 14 years" = "13", "47 years and over" = "47-49"),
            age = cleanAgeGroup(age)) %>%
     dtabs(count ~ age + time) %>%
-    Counts(dimscale = c(time = "Intervals"))
+    Counts(dimscale = c(time = "Intervals")) %>%
+    toInteger()
 
 check_total <- read_csv(file = "data/VSB355801_20181209_055056_66.csv",
                           skip = 1,
@@ -21,7 +22,7 @@ check_total <- read_csv(file = "data/VSB355801_20181209_055056_66.csv",
     unlist() %>%
     sum()
 
-stopifnot(all.equal(sum(reg_births), check_total))
+stopifnot(all.equal(sum(reg_births_age), check_total))
 
-saveRDS(reg_births,
-        file = "out/reg_births.rds")
+saveRDS(reg_births_age,
+        file = "out/reg_births_age.rds")

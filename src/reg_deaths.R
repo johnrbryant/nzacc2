@@ -12,7 +12,8 @@ reg_deaths <- read_csv(file = "data/VSD349201_20181209_054420_13.csv",
     mutate(age = cleanAgeGroup(age)) %>%
     gather(key = time, value = count, `2002`:`2018`) %>%
     dtabs(count ~ age + sex + time) %>%
-    Counts(dimscale = c(time = "Intervals"))
+    Counts(dimscale = c(time = "Intervals")) %>%
+    toInteger()
 
 check_total <- read_csv(file = "data/VSD349201_20181209_054420_13.csv",
                           skip = 1,

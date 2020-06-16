@@ -39,3 +39,7 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+# Large estimation objects
+out/*.est
+out/*.pred
