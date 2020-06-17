@@ -41,5 +41,5 @@ vignettes/*.pdf
 .Renviron
 
 # Large estimation objects
-out/*.est
-out/*.pred
+*.est
+*.pred
