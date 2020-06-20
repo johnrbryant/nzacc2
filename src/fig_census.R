@@ -7,7 +7,7 @@ plot_theme <- readRDS("out/plot_theme.rds")
 
 palette <- readRDS("out/palette.rds")
 
-census <- readRDS("out/census.rds") %>%
+census <- readRDS("calc/out/census.rds") %>%
     as.data.frame(midpoints = "age") %>%
     mutate(count = 1e-3 * count)
     

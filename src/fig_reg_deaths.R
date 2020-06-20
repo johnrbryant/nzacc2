@@ -7,7 +7,7 @@ plot_theme <- readRDS("out/plot_theme.rds")
 
 palette <- readRDS("out/palette.rds")
 
-reg_births <- readRDS("out/reg_deaths.rds") %>%
+reg_births <- readRDS("calc/out/reg_deaths.rds") %>%
     as.data.frame(midpoints = "age")
     
 p <- ggplot(reg_births, aes(x = age, y = count, color = sex)) +

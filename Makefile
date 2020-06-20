@@ -52,6 +52,16 @@ out/fig_migration_departures.pdf: src/fig_migration.R \
 	Rscript $< --direction=departures
 
 
+## Values from model
+
+out/vals_model_popn.rds: src/vals_model_popn.R \
+                         calc/out/model_base.est
+	Rscript $<
+
+out/vals_width_popn.rds: src/vals_width_popn.R \
+                         calc/out/model_base.est
+	Rscript $<
+
 
 
 ## Report

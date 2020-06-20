@@ -19,7 +19,7 @@ plot_theme <- readRDS("out/plot_theme.rds")
 
 palette <- readRDS("out/palette.rds")
 
-migration <- readRDS("out/migration.rds") %>%
+migration <- readRDS("calc/out/migration.rds") %>%
     as.data.frame(midpoints = "age") %>%
     filter(tolower(direction) == !!direction)
     

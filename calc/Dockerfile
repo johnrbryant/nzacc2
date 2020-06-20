@@ -9,8 +9,9 @@ RUN mkdir home/rstudio/out
 
 RUN R -q -e 'install.packages("coda")'
 RUN R -q -e 'devtools::install_github("statisticsnz/dembase")'
+RUN R -q -e 'devtools::install_github("statisticsnz/demest")'
 
 WORKDIR /home/rstudio
 
-RUN make out/datasets.rds
+RUN make inputs
 

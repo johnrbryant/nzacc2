@@ -13,7 +13,7 @@ population  <- Model(population ~ Poisson(mean ~ age * sex + age * time,
                                 damp = NULL),
                      age:time ~ DLM(damp = NULL,
                                     trend = NULL),
-                     jump = 0.005)
+                     jump = 0.02)
 
 births <- Model(births ~ Poisson(mean ~ age + sex + time),
                 age ~ DLM(trend = NULL,
@@ -32,7 +32,8 @@ immigration  <- Model(immigration ~ Poisson(mean ~ (age + sex + time)^2),
 
 emigration  <- Model(emigration ~ Poisson(mean ~ (age + sex + time)^2),
                      time ~ DLM(trend = NULL,
-                                damp = NULL))
+                                damp = NULL),
+                     jump = 0.05)
 
 system_models <- list(population = population,
                       births = births,
