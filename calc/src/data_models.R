@@ -11,23 +11,33 @@ net_undercount <- readRDS("out/net_undercount.rds")
 percent_undercount <- net_undercount %>%
     filter(variable == "percent") %>%
     dtabs(value ~ age + time) %>%
-    Values()  %>%
-    makeCompatible(census_counts)
+    Values() 
 
 mean <- (1 - percent_undercount / 100)
 
 percent_error <- net_undercount %>%
     filter(variable == "error") %>%
     dtabs(value ~ age + time) %>%
-    Values() %>%
-    makeCompatible(census_counts)
-
-sd <- ((percent_error / 100) * census_counts / 1.96) %>% 
     Values()
 
-census <- Model(census ~ NormalFixed(mean = mean, sd = sd, useExpose = TRUE),
-                series = "population")
+sd <- ((percent_error / 100) / 1.96) %>% 
+    Values()
 
+census <- Model(census ~ Poisson(mean ~ age * sex + time),
+                age ~ DLM(level = Level(scale = HalfT(df = Inf, scale = 0.01)),
+                          trend = NULL,
+                          damp = NULL,
+                          error = Error(scale = HalfT(df = Inf, scale = 0.01))),
+                age:sex ~ DLM(level = Level(scale = HalfT(df = Inf, scale = 0.01)),
+                              trend = NULL,
+                              damp = NULL,
+                              error = Error(scale = HalfT(df = Inf, scale = 0.01))),
+                series = "population",
+                jump = 0.0003,
+                aggregate = AgNormal(value = mean,
+                                     sd = sd,
+                                     jump = 0.0015))
+                                     
 
 ## Registered births and deaths
 

@@ -15,9 +15,9 @@ n_chain <- opts$n_chain %>% as.integer()
 
 min_burnin <- 10000
 target_iter <- 1000
-n_burnin <- mult * min_burnin
-n_sim <- mult * min_burnin
-n_thin <- max((n_sim * n_chain) / target_iter, 1)
+n_burnin <- ceiling(mult * min_burnin)
+n_sim <- ceiling(mult * min_burnin)
+n_thin <- ceiling((n_sim * n_chain) / target_iter)
 
 set.seed(0)
 

@@ -13,7 +13,7 @@ population  <- Model(population ~ Poisson(mean ~ age * sex + age * time,
                                 damp = NULL),
                      age:time ~ DLM(damp = NULL,
                                     trend = NULL),
-                     jump = 0.02)
+                     jump = 0.01)
 
 births <- Model(births ~ Poisson(mean ~ age + sex + time),
                 age ~ DLM(trend = NULL,
