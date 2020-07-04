@@ -23,17 +23,13 @@ percent_error <- net_undercount %>%
 sd <- ((percent_error / 100) / 1.96) %>% 
     Values()
 
-census <- Model(census ~ Poisson(mean ~ age * sex + time),
+census <- Model(census ~ Binomial(mean ~ age + sex + time),
                 age ~ DLM(level = Level(scale = HalfT(df = Inf, scale = 0.01)),
                           trend = NULL,
                           damp = NULL,
                           error = Error(scale = HalfT(df = Inf, scale = 0.01))),
-                age:sex ~ DLM(level = Level(scale = HalfT(df = Inf, scale = 0.01)),
-                              trend = NULL,
-                              damp = NULL,
-                              error = Error(scale = HalfT(df = Inf, scale = 0.01))),
                 series = "population",
-                jump = 0.0003,
+                jump = 0.0004,
                 aggregate = AgNormal(value = mean,
                                      sd = sd,
                                      jump = 0.0015))

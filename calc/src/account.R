@@ -25,13 +25,22 @@ departures <- migration %>%
     expandIntervals(dimension = "age", breaks = 0:100)
 
 initial <- census %>%
-    subarray(time == 2001) + 100
+    subarray(time == 2001)
+
+initial <- toInteger(1.05 * initial, force = TRUE)
+births <- toInteger(1.02 * reg_births, force = TRUE)
+immigration <- toInteger(1.02 * arrivals, force = TRUE)
+deaths <- toInteger(0.98 * reg_deaths, force = TRUE)
+emigration <- toInteger(0.98 * departures, force = TRUE)
 
 account <- derivePopulation(initial = initial,
-                            births = reg_births,
-                            entries = list(immigration = arrivals),
-                            exits = list(deaths = reg_deaths,
-                                         emigration = departures))
+                            births = births,
+                            entries = list(immigration = immigration),
+                            exits = list(deaths = deaths,
+                                         emigration = emigration))
+
+
+stopifnot(all(population(account) >= census))
 
 saveRDS(account,
         file = "out/account.rds")
