@@ -27,10 +27,10 @@ departures <- migration %>%
 initial <- census %>%
     subarray(time == 2001)
 
-initial <- toInteger(1.05 * initial, force = TRUE)
+initial <- toInteger(initial + 100, force = TRUE)
 births <- toInteger(1.02 * reg_births, force = TRUE)
 immigration <- toInteger(1.02 * arrivals, force = TRUE)
-deaths <- toInteger(0.98 * reg_deaths, force = TRUE)
+deaths <- toInteger(reg_deaths, force = TRUE)
 emigration <- toInteger(0.98 * departures, force = TRUE)
 
 account <- derivePopulation(initial = initial,
