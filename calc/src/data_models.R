@@ -35,6 +35,12 @@ census <- Model(census ~ Binomial(mean ~ age + sex + time),
                                      jump = 0.0015))
                                      
 
+## People aged 105+
+
+oldest <- Model(oldest ~ Round3(),
+                series = "population")
+
+
 ## Registered births and deaths
 
 reg_births_age <- Model(reg_births_age ~ PoissonBinomial(prob = 0.98),
@@ -57,9 +63,11 @@ departures <- Model(departures ~ PoissonBinomial(prob = 0.95),
 
 
 
+
 ## Save
 
 data_models <- list(census = census,
+                    oldest = oldest,
                     reg_births_age = reg_births_age,
                     reg_births_sex = reg_births_sex,
                     reg_deaths = reg_deaths,

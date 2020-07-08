@@ -18,13 +18,16 @@ arrivals <- migration %>%
 departures <- migration %>%
     subarray(direction == "Departures")
 
+oldest <- readRDS("out/oldest.rds")
+
 
 datasets <- list(census = census,
                  reg_births_age = reg_births_age,
                  reg_births_sex = reg_births_sex,
                  reg_deaths = reg_deaths,
                  arrivals = arrivals,
-                 departures = departures)
+                 departures = departures,
+                 oldest = oldest)
 
 saveRDS(datasets,
         file = "out/datasets.rds")

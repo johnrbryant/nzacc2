@@ -25,20 +25,24 @@ out/idi.rds: src/idi.R \
              data/exp-pop-estimates-2007-16-csv.csv
 	Rscript $<
 
-out/reg_births_age.rds : src/reg_births_age.R \
-                         data/VSB355801_20181209_055056_66.csv
+out/reg_births_age.rds: src/reg_births_age.R \
+                        data/VSB355801_20181209_055056_66.csv
 	Rscript $<
 
-out/reg_births_sex.rds : src/reg_births_sex.R \
-                         data/VSB357002_20200608_085016_54.csv
+out/reg_births_sex.rds: src/reg_births_sex.R \
+                        data/VSB357002_20200608_085016_54.csv
 	Rscript $<
 
-out/reg_deaths.rds : src/reg_deaths.R \
-                     data/VSD349201_20181209_054420_13.csv
+out/reg_deaths.rds: src/reg_deaths.R \
+                    data/VSD349201_20181209_054420_13.csv
 	Rscript $<
 
-out/migration.rds : src/migration.R \
-                    data/ITM552105_20200603_110236_41.csv
+out/migration.rds: src/migration.R \
+                   data/ITM552105_20200603_110236_41.csv
+	Rscript $<
+
+out/oldest.rds: src/oldest.R \
+                out/reg_deaths.rds
 	Rscript $<
 
 
@@ -49,7 +53,8 @@ out/datasets.rds: src/datasets.R \
                   out/reg_births_age.rds \
                   out/reg_births_sex.rds \
                   out/reg_deaths.rds \
-                  out/migration.rds
+                  out/migration.rds \
+                  out/oldest.rds
 	Rscript $<
 
 out/data_models.rds: src/data_models.R \
