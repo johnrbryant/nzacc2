@@ -4,40 +4,40 @@ library(dplyr)
 
 ## Census + PES
 
-net_undercount <- readRDS("out/net_undercount.rds")
-
 census_counts <- readRDS("out/census.rds")
+
+net_undercount <- readRDS("out/net_undercount.rds")
 
 percent_undercount <- net_undercount %>%
     filter(variable == "percent") %>%
     dtabs(value ~ age + time) %>%
     Values() 
 
-mean <- (1 - percent_undercount / 100) %>%
-    makeCompatible(census_counts)
+mean <- (1 - percent_undercount / 100)
 
 percent_error <- net_undercount %>%
     filter(variable == "error") %>%
     dtabs(value ~ age + time) %>%
     Values()
 
-sd_relative <- ((percent_error / 100) / 1.96) %>% 
+sd <- ((percent_error / 100) / 1.96) %>% 
     Values()
 
-sd_abs <- sd_relative * census_counts
-
-## multiply by 2 to take account of fact that
-## coverage rates can vary within age groups
-
-sd <- Values(2 * sd_abs)
-
-census <- Model(census ~ NormalFixed(mean = mean, sd = sd),
-                series = "population")
+census <- Model(census ~ Binomial(mean ~ age + sex + time),
+                age ~ DLM(level = Level(scale = HalfT(df = Inf, scale = 0.01)),
+                          trend = NULL,
+                          damp = NULL,
+                          error = Error(scale = HalfT(df = Inf, scale = 0.01))),
+                series = "population",
+                jump = 0.0004,
+                aggregate = AgNormal(value = mean,
+                                     sd = sd,
+                                     jump = 0.0015))
                                      
 
 ## People aged 105+
 
-oldest <- Model(oldest ~ PoissonBinomial(prob = 0.5),
+oldest <- Model(oldest ~ Round3(),
                 series = "population")
 
 

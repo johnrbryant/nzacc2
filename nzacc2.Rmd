@@ -13,30 +13,61 @@ library(knitr)
 opts_chunk$set(echo = FALSE)
 ```
 
-## Data
+# Data
 
 ```{r census, fig.cap = "Census data"}
-include_graphics("out/fig_census.pdf")
+include_graphics("out/fig_data_census.pdf")
 ```
 
-```{r reg-births-age, fig.cap = "Registered births by age"}
-include_graphics("out/fig_reg_births_age.pdf")
+```{r regbirths-age, fig.cap = "Registered births by age"}
+include_graphics("out/fig_data_regbirths_age.pdf")
 ```
 
-```{r reg-births-sex, fig.cap = "Registered births by sex"}
-include_graphics("out/fig_reg_births_sex.pdf")
+```{r regbirths-sex, fig.cap = "Registered births by sex"}
+include_graphics("out/fig_data_regbirths_sex.pdf")
 ```
 
-```{r reg-deaths, fig.cap = "Registered deaths"}
-include_graphics("out/fig_reg_deaths.pdf")
+```{r regdeaths, fig.cap = "Registered deaths"}
+include_graphics("out/fig_data_regdeaths.pdf")
 ```
 
 ```{r arrivals, fig.cap = "International arrivals"}
-include_graphics("out/fig_migration_arrivals.pdf")
+include_graphics("out/fig_data_migration_arrivals.pdf")
 ```
 
 ```{r departures, fig.cap = "International departures"}
-include_graphics("out/fig_migration_departures.pdf")
+include_graphics("out/fig_data_migration_departures.pdf")
 ```
 
+\clearpage
 
+# Estimates
+
+
+```{r popn-female, fig.cap = "Population - female. Blue bands denote 95% credible intervals. Black lines denote unadjusted census counts."}
+include_graphics("out/fig_est_popn_female.pdf")
+```
+
+```{r popn-male, fig.cap = "Population - male. Blue bands denote 95% credible intervals. Black lines denote unadjusted census counts."}
+include_graphics("out/fig_est_popn_male.pdf")
+```
+
+```{r width-time, fig.cap = "Width of 95% credible intervals for national population, over time. Dotted lines denote census years."}
+include_graphics("out/fig_est_width_time.pdf")
+```
+
+```{r width-age, fig.cap = "Width of 95% credible intervals for individual age groups, in two census years"}
+include_graphics("out/fig_est_width_age.pdf")
+```
+
+```{r lifeexp, fig.cap = "Life expectancy. Light blue bands denote 95% credible intervals, and dark blue bands denote 50% credible intervals."}
+include_graphics("out/fig_est_lifeexp.pdf")
+```
+
+```{r tfr, fig.cap = "Total fertility rate. Light blue bands denote 95% credible intervals, and dark blue bands denote 50% credible intervals."}
+include_graphics("out/fig_est_tfr.pdf")
+```
+
+```{r cover, fig.cap = "Estimated coverage ratios from censuses. Light blue bands denote 95% credible intervals, and dark blue bands denote 50% credible intervals."}
+include_graphics("out/fig_est_census_cover.pdf")
+```

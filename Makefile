@@ -13,67 +13,161 @@ out/palette.rds: src/palette.R
 	Rscript $<
 
 
+
+## Values from data
+
+out/vals_data_census.rds: src/vals_data_census.R \
+                          calc/out/census.rds
+	Rscript $<
+
+out/vals_data_regbirths_age.rds: src/vals_data_regbirths_age.R \
+                                 calc/out/reg_births_age.rds
+	Rscript $<
+
+out/vals_data_regbirths_sex.rds: src/vals_data_regbirths_sex.R \
+                                 calc/out/reg_births_sex.rds
+	Rscript $<
+
+out/vals_data_regdeaths.rds: src/vals_data_regdeaths.R \
+                             calc/out/reg_deaths.rds
+	Rscript $<
+
+out/vals_data_migration.rds: src/vals_data_migration.R \
+                             calc/out/migration.rds
+	Rscript $<
+
+
+
 ## Graphs of data
 
-out/fig_census.pdf: src/fig_census.R \
-                    calc/out/census.rds \
-                    out/plot_theme.rds \
-                    out/palette.rds
+out/fig_data_census.pdf: src/fig_data_census.R \
+                         out/vals_data_census.rds \
+                         out/plot_theme.rds \
+                         out/palette.rds
 	Rscript $<
 
-out/fig_reg_births_age.pdf: src/fig_reg_births_age.R \
-                            calc/out/reg_births_age.rds \
-                            out/plot_theme.rds \
-                            out/palette.rds
-	Rscript $<
-
-out/fig_reg_births_sex.pdf: src/fig_reg_births_sex.R \
-                            calc/out/reg_births_sex.rds \
-                            out/plot_theme.rds \
-                            out/palette.rds
-	Rscript $<
-
-out/fig_reg_deaths.pdf: src/fig_reg_deaths.R \
-                        calc/out/reg_deaths.rds \
-                        out/plot_theme.rds \
-                        out/palette.rds
-	Rscript $<
-
-out/fig_migration_arrivals.pdf: src/fig_migration.R \
-                                calc/out/migration.rds \
+out/fig_data_regbirths_age.pdf: src/fig_data_regbirths_age.R \
+                                out/vals_data_regbirths_age.rds \
                                 out/plot_theme.rds \
                                 out/palette.rds
+	Rscript $<
+
+out/fig_data_regbirths_sex.pdf: src/fig_data_regbirths_sex.R \
+                                out/vals_data_regbirths_sex.rds \
+                                out/plot_theme.rds \
+                                out/palette.rds
+	Rscript $<
+
+out/fig_data_regdeaths.pdf: src/fig_data_regdeaths.R \
+                            out/vals_data_regdeaths.rds \
+                            out/plot_theme.rds \
+                            out/palette.rds
+	Rscript $<
+
+out/fig_data_migration_arrivals.pdf: src/fig_data_migration.R \
+                                     out/vals_data_migration.rds \
+                                     out/plot_theme.rds \
+                                     out/palette.rds
 	Rscript $< --direction=arrivals
 
-out/fig_migration_departures.pdf: src/fig_migration.R \
-                                  calc/out/migration.rds \
-                                  out/plot_theme.rds \
-                                  out/palette.rds
+out/fig_data_migration_departures.pdf: src/fig_data_migration.R \
+                                       out/vals_data_migration.rds \
+                                       out/plot_theme.rds \
+                                       out/palette.rds
 	Rscript $< --direction=departures
 
 
 ## Values from model
 
-out/vals_model_popn.rds: src/vals_model_popn.R \
-                         calc/out/model_base.est
+out/vals_est_popn.rds: src/vals_est_popn.R \
+                       calc/out/model_base.est
 	Rscript $<
 
-out/vals_width_popn.rds: src/vals_width_popn.R \
-                         calc/out/model_base.est
+out/vals_est_width_age.rds: src/vals_est_width_age.R \
+                            calc/out/model_base.est
 	Rscript $<
 
+out/vals_est_width_time.rds: src/vals_est_width_time.R \
+                             calc/out/model_base.est
+	Rscript $<
+
+out/vals_est_lifeexp.rds: src/vals_est_lifeexp.R \
+                          calc/out/model_base.est
+	Rscript $<
+
+out/vals_est_tfr.rds: src/vals_est_tfr.R \
+                      calc/out/model_base.est
+	Rscript $<
+
+out/vals_est_census_cover.rds: src/vals_est_census_cover.R \
+                               calc/out/model_base.est
+	Rscript $<
+
+
+## Graphs of estimates
+
+out/fig_est_popn_female.pdf: src/fig_est_popn.R \
+                             out/vals_est_popn.rds \
+                             out/vals_data_census.rds \
+                             out/plot_theme.rds \
+                             out/palette.rds
+	Rscript $< --sex=female
+
+out/fig_est_popn_male.pdf: src/fig_est_popn.R \
+                           out/vals_est_popn.rds \
+                           out/vals_data_census.rds \
+                           out/plot_theme.rds \
+                           out/palette.rds
+	Rscript $< --sex=male
+
+out/fig_est_width_time.pdf: src/fig_est_width_time.R \
+                            out/vals_est_width_time.rds \
+                            out/plot_theme.rds \
+                            out/palette.rds
+	Rscript $<
+
+out/fig_est_width_age.pdf: src/fig_est_width_age.R \
+                           out/vals_est_width_age.rds \
+                           out/plot_theme.rds \
+                           out/palette.rds
+	Rscript $<
+
+out/fig_est_lifeexp.pdf: src/fig_est_lifeexp.R \
+                         out/vals_est_lifeexp.rds \
+                         out/plot_theme.rds \
+                         out/palette.rds
+	Rscript $<
+
+out/fig_est_tfr.pdf: src/fig_est_tfr.R \
+                     out/vals_est_tfr.rds \
+                     out/plot_theme.rds \
+                     out/palette.rds
+	Rscript $<
+
+out/fig_est_census_cover.pdf: src/fig_est_census_cover.R \
+                              out/vals_est_census_cover.rds \
+                              out/plot_theme.rds \
+                              out/palette.rds
+	Rscript $<
 
 
 ## Report
 
 
 nzacc2.pdf: nzacc2.Rmd \
-            out/fig_census.pdf \
-            out/fig_reg_births_age.pdf \
-            out/fig_reg_births_sex.pdf \
-            out/fig_reg_deaths.pdf \
-            out/fig_migration_arrivals.pdf \
-            out/fig_migration_departures.pdf
+            out/fig_data_census.pdf \
+            out/fig_data_regbirths_age.pdf \
+            out/fig_data_regbirths_sex.pdf \
+            out/fig_data_regdeaths.pdf \
+            out/fig_data_migration_arrivals.pdf \
+            out/fig_data_migration_departures.pdf \
+            out/fig_est_popn_female.pdf \
+            out/fig_est_popn_male.pdf \
+            out/fig_est_width_time.pdf \
+            out/fig_est_width_age.pdf \
+            out/fig_est_lifeexp.pdf \
+            out/fig_est_tfr.pdf \
+            out/fig_est_census_cover.pdf
 	Rscript -e "rmarkdown::render('$<')"
 
 

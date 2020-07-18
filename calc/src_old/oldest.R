@@ -4,7 +4,7 @@ library(dplyr)
 library(magrittr)
 
 
-n_living <- 2L
+n_living <- 0L
 
 vals_time <- readRDS("out/reg_deaths.rds") %>%
     dimnames() %>%
