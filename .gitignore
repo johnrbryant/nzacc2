@@ -2,6 +2,7 @@
 .Rhistory
 .Rapp.history
 .bash_history
+.DS_store
 
 # Session Data files
 .RData

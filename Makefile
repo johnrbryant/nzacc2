@@ -1,8 +1,12 @@
 
 
 .PHONY: all
-all: nzacc2.pdf
-
+all: nzacc2.pdf \
+     out/fig_est_popn_small_male.pdf \
+     out/fig_est_width_age_sex.pdf \
+     out/fig_est_census_cover_small.pdf \
+     out/fig_est_mort.pdf \
+     out/fig_est_lifeexp_small.pdf
 
 ## Shared parameters
 
@@ -34,6 +38,10 @@ out/vals_data_regdeaths.rds: src/vals_data_regdeaths.R \
 
 out/vals_data_migration.rds: src/vals_data_migration.R \
                              calc/out/migration.rds
+	Rscript $<
+
+out/vals_direct_mort.rds: src/vals_direct_mort.R \
+                          calc/out/datasets.rds
 	Rscript $<
 
 
@@ -87,11 +95,19 @@ out/vals_est_width_age.rds: src/vals_est_width_age.R \
                             calc/out/model_base.est
 	Rscript $<
 
+out/vals_est_width_age_sex.rds: src/vals_est_width_age_sex.R \
+                                calc/out/model_base.est
+	Rscript $<
+
 out/vals_est_width_time.rds: src/vals_est_width_time.R \
                              calc/out/model_base.est
 	Rscript $<
 
 out/vals_est_lifeexp.rds: src/vals_est_lifeexp.R \
+                          calc/out/model_base.est
+	Rscript $<
+
+out/vals_est_mort.rds: src/vals_est_mort.R \
                           calc/out/model_base.est
 	Rscript $<
 
@@ -120,6 +136,20 @@ out/fig_est_popn_male.pdf: src/fig_est_popn.R \
                            out/palette.rds
 	Rscript $< --sex=male
 
+out/fig_est_popn_small_female.pdf: src/fig_est_popn_small.R \
+                             out/vals_est_popn.rds \
+                             out/vals_data_census.rds \
+                             out/plot_theme.rds \
+                             out/palette.rds
+	Rscript $< --sex=female
+
+out/fig_est_popn_small_male.pdf: src/fig_est_popn_small.R \
+                           out/vals_est_popn.rds \
+                           out/vals_data_census.rds \
+                           out/plot_theme.rds \
+                           out/palette.rds
+	Rscript $< --sex=male
+
 out/fig_est_width_time.pdf: src/fig_est_width_time.R \
                             out/vals_est_width_time.rds \
                             out/plot_theme.rds \
@@ -132,9 +162,24 @@ out/fig_est_width_age.pdf: src/fig_est_width_age.R \
                            out/palette.rds
 	Rscript $<
 
+out/fig_est_width_age_sex.pdf: src/fig_est_width_age_sex.R \
+                           out/vals_est_width_age_sex.rds
+	Rscript $<
+
+out/fig_est_mort.pdf: src/fig_est_mort.R \
+                         out/vals_est_mort.rds \
+                         out/vals_direct_mort.rds \
+                         out/palette.rds
+	Rscript $<
+
 out/fig_est_lifeexp.pdf: src/fig_est_lifeexp.R \
                          out/vals_est_lifeexp.rds \
                          out/plot_theme.rds \
+                         out/palette.rds
+	Rscript $<
+
+out/fig_est_lifeexp_small.pdf: src/fig_est_lifeexp_small.R \
+                         out/vals_est_lifeexp.rds \
                          out/palette.rds
 	Rscript $<
 
@@ -147,6 +192,11 @@ out/fig_est_tfr.pdf: src/fig_est_tfr.R \
 out/fig_est_census_cover.pdf: src/fig_est_census_cover.R \
                               out/vals_est_census_cover.rds \
                               out/plot_theme.rds \
+                              out/palette.rds
+	Rscript $<
+
+out/fig_est_census_cover_small.pdf: src/fig_est_census_cover_small.R \
+                              out/vals_est_census_cover.rds \
                               out/palette.rds
 	Rscript $<
 

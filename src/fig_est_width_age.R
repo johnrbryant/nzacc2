@@ -20,6 +20,6 @@ p <- ggplot(data, aes(x = age, y = width, color = factor(time))) +
 graphics.off()
 pdf(file = "out/fig_est_width_age.pdf",
     width = 7,
-    height = 4)
+    height = 3.5)
 plot(p)
 dev.off()
