@@ -44,3 +44,8 @@ vignettes/*.pdf
 # Large estimation objects
 *.est
 *.pred
+*.est_1
+*.est_2
+*.est_3
+*.est_4
+

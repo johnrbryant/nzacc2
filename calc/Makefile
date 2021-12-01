@@ -1,5 +1,5 @@
 
-MULT = 1
+MULT = 0.001
 N_CHAIN = 4
 
 .PHONY: all

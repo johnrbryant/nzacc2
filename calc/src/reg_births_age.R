@@ -7,7 +7,7 @@ library(readr)
 reg_births_age <- read_csv(file = "data/VSB355801_20181209_055056_66.csv",
                        skip = 1,
                        n_max = 35) %>%
-    rename(age = X1) %>%
+    rename(age = `...1`) %>%
     gather(key = time, value = count, `2002`:`2018`) %>%
     mutate(age = recode(age, "Under 14 years" = "13", "47 years and over" = "47-49"),
            age = cleanAgeGroup(age)) %>%
