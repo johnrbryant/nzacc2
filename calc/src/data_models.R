@@ -26,10 +26,12 @@ sd_relative <- ((percent_error / 100) / 1.96) %>%
 
 sd_abs <- sd_relative * census_counts
 
-## multiply by 2 to take account of fact that
+## multiply by 5 to take account of fact that
 ## coverage rates can vary within age groups
+## and that the PES did not include all sources
+## of uncertainty
 
-sd <- Values(2 * sd_abs)
+sd <- Values(5 * sd_abs)
 
 census <- Model(census ~ NormalFixed(mean = mean, sd = sd),
                 series = "population")

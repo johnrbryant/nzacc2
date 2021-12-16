@@ -44,6 +44,10 @@ out/vals_direct_mort.rds: src/vals_direct_mort.R \
                           calc/out/datasets.rds
 	Rscript $<
 
+out/vals_data_erp.rds: src/vals_data_erp.R \
+                       calc/out/erp.rds
+	Rscript $<
+
 
 
 ## Graphs of data
@@ -117,6 +121,11 @@ out/vals_est_tfr.rds: src/vals_est_tfr.R \
 
 out/vals_est_census_cover.rds: src/vals_est_census_cover.R \
                                calc/out/model_base.est
+	Rscript $<
+
+out/vals_est_erp_cover.rds: src/vals_est_erp_cover.R \
+                            calc/out/model_base.est \
+                            calc/out/erp.rds
 	Rscript $<
 
 
@@ -198,6 +207,17 @@ out/fig_est_census_cover.pdf: src/fig_est_census_cover.R \
 out/fig_est_census_cover_small.pdf: src/fig_est_census_cover_small.R \
                               out/vals_est_census_cover.rds \
                               out/palette.rds
+	Rscript $<
+
+out/fig_est_popn_2018.pdf: src/fig_est_popn_2018.R \
+                           out/vals_est_popn.rds \
+                           out/vals_data_erp.rds \
+                           out/palette.rds
+	Rscript $<
+
+out/fig_est_erp_cover.pdf: src/fig_est_erp_cover.R \
+                           out/vals_est_erp_cover.rds \
+                           out/palette.rds
 	Rscript $<
 
 

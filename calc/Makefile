@@ -45,6 +45,10 @@ out/oldest.rds: src/oldest.R \
                 out/reg_deaths.rds
 	Rscript $<
 
+out/erp.rds: src/erp.R \
+             data/DPE403903_20211206_043504_84.csv
+	Rscript $<
+
 
 ## Construct model
 
